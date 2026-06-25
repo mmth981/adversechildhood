@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACEs &amp; Resilience in Northern Thailand — Research Report</title>
+<meta name="description" content="Adverse Childhood Experiences and Resilience Development in Ethnic Minority Preschool Children: The Role of Parental Care, Early Childhood Education, and Community Support in Northern Thailand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#28344A;
+  --indigo-deep:#1B2434;
+  --paper:#F1ECE2;
+  --paper-deep:#E7E0CF;
+  --ink:#2A2520;
+  --ochre:#C8902E;
+  --madder:#8B3A3A;
+  --thread:#B9AE9A;
+  --display: 'Fraunces', serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.65;
+  font-size:18px;
+}
+::selection{background:var(--ochre);color:#fff;}
+
+a{color:var(--indigo);text-decoration-thickness:1px;}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;}
+
+/* ---------- Thread nav ---------- */
+.thread-nav{
+  position:fixed;
+  left:0; top:0; bottom:0;
+  width:18px;
+  z-index:50;
+  display:flex;
+  align-items:center;
+}
+.thread-nav ul{
+  list-style:none;
+  margin:0; padding:0;
+  position:relative;
+  height:78vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.thread-nav ul::before{
+  content:'';
+  position:absolute;
+  left:8px; top:0; bottom:0;
+  width:2px;
+  background:var(--thread);
+  opacity:.5;
+}
+.thread-nav li{position:relative;}
+.thread-nav a{
+  display:flex;
+  align-items:center;
+  height:14px;
+  text-decoration:none;
+  position:relative;
+}
+.thread-nav .knot{
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--paper);
+  border:2px solid var(--thread);
+  margin-left:5px;
+  display:block;
+  transition:background .25s, border-color .25s, transform .25s;
+  position:relative;
+  z-index:2;
+}
+.thread-nav a.active .knot, .thread-nav a:hover .knot{
+  background:var(--ochre);
+  border-color:var(--ochre);
+  transform:scale(1.3);
+}
+.thread-label{
+  position:absolute;
+  left:24px;
+  top:50%;
+  transform:translateY(-50%);
+  white-space:nowrap;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--indigo);
+  background:var(--paper);
+  padding:2px 6px;
+  border-radius:2px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .15s;
+}
+.thread-nav a:hover .thread-label, .thread-nav a.active .thread-label{opacity:1;}
+
+@media (max-width:760px){
+  .thread-nav{display:none;}
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 75% 15%, rgba(200,144,46,0.18), transparent 55%),
+    linear-gradient(180deg, var(--indigo-deep), var(--indigo));
+  color:var(--paper);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:8vh 8vw;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  /* woven thread texture, faint */
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(241,236,226,0.035) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, rgba(241,236,226,0.035) 0 1px, transparent 1px 26px);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#D9C9A0;
+  margin-bottom:28px;
+}
+.hero h1{
+  font-size:clamp(2.1rem, 5vw, 3.6rem);
+  font-weight:500;
+  line-height:1.12;
+  max-width:880px;
+  color:#fff;
+  letter-spacing:-0.01em;
+}
+.hero-sub{
+  margin-top:34px;
+  font-size:1.05rem;
+  color:#CFC7B4;
+  max-width:560px;
+}
+.hero-authors{
+  margin-top:30px;
+  font-family:var(--mono);
+  font-size:13px;
+  color:#AEB8C9;
+  line-height:1.9;
+}
+.hero-stats{
+  display:flex;
+  gap:48px;
+  margin-top:56px;
+  flex-wrap:wrap;
+}
+.hero-stat-num{
+  font-family:var(--display);
+  font-size:2.1rem;
+  color:var(--ochre);
+  font-weight:600;
+  line-height:1;
+}
+.hero-stat-label{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:#AEB8C9;
+  margin-top:6px;
+  max-width:140px;
+}
+.scroll-cue{
+  position:absolute;
+  bottom:36px; left:8vw;
+  font-family:var(--mono);
+  font-size:11px;
+  color:#9AA3B5;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.scroll-cue .line{width:1px;height:34px;background:#9AA3B5;animation:drip 2.2s ease-in-out infinite;}
+@keyframes drip{0%,100%{transform:scaleY(1);opacity:.5;}50%{transform:scaleY(0.6);opacity:1;}}
+
+/* ---------- Sections ---------- */
+.block{
+  padding:96px 0;
+  position:relative;
+}
+.band-a{background:var(--paper);}
+.band-b{background:var(--paper-deep);}
+.block-inner{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 8vw;
+}
+.sec-title{
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  margin-bottom:.3em;
+  color:var(--indigo-deep);
+  position:relative;
+  padding-left:22px;
+}
+.sec-title::before{
+  content:'';
+  position:absolute;
+  left:0; top:.18em; bottom:.18em;
+  width:4px;
+  background:var(--ochre);
+}
+h3.sub{
+  font-size:1.25rem;
+  margin-top:2.2em;
+  margin-bottom:.6em;
+  color:var(--indigo);
+  font-style:italic;
+  font-weight:500;
+}
+.block p{margin:0 0 1.15em 0;}
+.block li{margin-bottom:.5em;}
+.block ol, .block ul{padding-left:1.3em;}
+em{color:var(--indigo);font-style:italic;}
+strong{font-weight:600;color:var(--ink);}
+
+.ack-note{
+  margin-top:2.4em;
+  padding:18px 22px;
+  border-left:2px solid var(--thread);
+  background:rgba(0,0,0,0.025);
+}
+.ack-label{
+  font-family:var(--mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--indigo);
+  margin:0 0 .5em 0;
+}
+.ack-note p:last-child{margin-bottom:0;font-size:.95rem;}
+
+.callout{
+  border:1px solid #D8A23B55;
+  background:#FBF3E2;
+  border-left:4px solid var(--ochre);
+  padding:18px 22px;
+  margin-top:1.6em;
+  font-size:.95rem;
+}
+.callout p{margin:0;}
+
+/* ---------- Demographic cards ---------- */
+.demo-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  margin:1.8em 0;
+}
+@media (max-width:700px){.demo-grid{grid-template-columns:1fr;}}
+.demo-card{
+  background:#fff;
+  border:1px solid #00000012;
+  border-radius:3px;
+  padding:20px;
+}
+.demo-card-label{
+  font-family:var(--mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--indigo);
+  margin:0;
+}
+.demo-card-n{
+  font-family:var(--display);
+  font-size:1.5rem;
+  color:var(--madder);
+  margin:.1em 0 .8em 0;
+}
+.demo-table{width:100%;min-width:480px;border-collapse:collapse;font-size:.82rem;}
+.demo-card{overflow-x:auto;}
+.demo-table th, .demo-table td{padding:5px 6px;text-align:right;border-bottom:1px solid #0000000f;}
+.demo-table th:first-child, .demo-table td:first-child{text-align:left;}
+.demo-table th{font-family:var(--mono);font-weight:500;color:#665;font-size:.72rem;}
+.note{font-size:.88rem;color:#665E52;}
+
+/* ---------- Significance chart ---------- */
+.sig-chart{margin:2.2em 0;}
+.sig-row{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.sig-label{width:170px;flex-shrink:0;font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;color:var(--indigo);}
+.sig-track{flex:1;background:#00000010;border-radius:2px;height:34px;position:relative;overflow:hidden;}
+.sig-fill{height:100%;display:flex;align-items:center;padding-left:12px;border-radius:2px 0 0 2px;animation:grow 1.1s ease-out;}
+.sig-fill.ochre{background:var(--ochre);}
+.sig-fill.madder{background:var(--madder);}
+.sig-fill-text{font-family:var(--mono);font-size:.75rem;color:#fff;white-space:nowrap;}
+@keyframes grow{from{width:0;}}
+.sig-caption{font-size:.85rem;color:#665E52;margin-top:.6em;}
+
+/* ---------- Strategy cards ---------- */
+.strategy-lead{
+  font-family:var(--mono);
+  font-size:11.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--madder);
+  margin:2em 0 .8em 0;
+}
+.strategy-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:1.4em;
+}
+@media (max-width:700px){.strategy-grid{grid-template-columns:1fr;}}
+.strategy-card{
+  background:#fff;
+  border-radius:3px;
+  padding:16px 18px;
+  border:1px solid #00000012;
+}
+.strategy-name{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1.02rem;
+  color:var(--indigo-deep);
+  margin:0 0 .4em 0;
+}
+.strategy-card p:last-child{margin:0;font-size:.92rem;color:#473F35;}
+
+/* ---------- Data tables / disclosures ---------- */
+.data-disclosure{
+  margin:1.6em 0;
+  border:1px solid #00000016;
+  background:#fff;
+  border-radius:3px;
+}
+.data-disclosure summary{
+  cursor:pointer;
+  padding:14px 18px;
+  font-family:var(--mono);
+  font-size:.85rem;
+  color:var(--indigo);
+  list-style:none;
+  position:relative;
+  padding-left:34px;
+}
+.data-disclosure summary::-webkit-details-marker{display:none;}
+.data-disclosure summary::before{
+  content:'+';
+  position:absolute;
+  left:14px; top:50%;
+  transform:translateY(-55%);
+  font-size:1.1rem;
+  color:var(--ochre);
+}
+.data-disclosure[open] summary::before{content:'\2212';}
+.table-scroll{overflow-x:auto;padding:0 18px 18px 18px;}
+table.data-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--mono);
+  font-size:.74rem;
+  min-width:640px;
+}
+table.data-table th{
+  text-align:right;
+  padding:6px 8px;
+  border-bottom:1px solid var(--indigo);
+  color:var(--indigo);
+  white-space:nowrap;
+  position:sticky;
+  top:0;
+  background:#fff;
+}
+table.data-table td{padding:5px 8px;text-align:right;border-bottom:1px solid #00000010;white-space:nowrap;}
+table.data-table th:nth-child(2), table.data-table td.lbl{text-align:left;white-space:normal;min-width:170px;}
+td.num{color:#998;}
+tr.sig td.num, tr.sig{background:#C8902E0d;}
+tr.nonsig{opacity:.55;}
+.legend{padding:0 18px 16px;font-size:.78rem;color:#665E52;}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;}
+.dot.ochre{background:var(--ochre);}
+.dot.madder{background:var(--madder);}
+.dot.grey{background:#ccc;}
+
+/* ---------- References ---------- */
+.ref-list{font-size:.92rem;}
+.ref-entry{
+  padding-left:1.6em;
+  text-indent:-1.6em;
+  margin-bottom:1.1em;
+  color:#3A332B;
+}
+.ref-entry em{color:inherit;}
+
+/* ---------- Appendices ---------- */
+.appendix-body{padding:0 18px 18px;font-size:.92rem;}
+.appendix-body p{margin-bottom:.8em;}
+.appendix-body ol{padding-left:1.3em;}
+
+/* ---------- Footer ---------- */
+footer{
+  background:var(--indigo-deep);
+  color:#9AA3B5;
+  padding:48px 8vw 60px;
+  font-size:.85rem;
+}
+footer a{color:#D9C9A0;}
+.footer-grant{font-family:var(--mono);font-size:.75rem;margin-top:18px;color:#717C90;}
+
+/* progress bar */
+#progress{
+  position:fixed;top:0;left:0;height:2px;background:var(--ochre);
+  width:0%;z-index:60;transition:width .1s linear;
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav class="thread-nav" aria-label="Report sections">
+<ul>
+<li><a href="#hero" data-target="hero"><span class="knot"></span><span class="thread-label">Cover</span></a></li>
+<li><a href="#abstract" data-target="abstract"><span class="knot"></span><span class="thread-label">Abstract</span></a></li>
+<li><a href="#introduction" data-target="introduction"><span class="knot"></span><span class="thread-label">Introduction</span></a></li>
+<li><a href="#significance-of-the-study" data-target="significance-of-the-study"><span class="knot"></span><span class="thread-label">Significance</span></a></li>
+<li><a href="#literature-review" data-target="literature-review"><span class="knot"></span><span class="thread-label">Literature Review</span></a></li>
+<li><a href="#method" data-target="method"><span class="knot"></span><span class="thread-label">Method</span></a></li>
+<li><a href="#results" data-target="results"><span class="knot"></span><span class="thread-label">Results</span></a></li>
+<li><a href="#discussion" data-target="discussion"><span class="knot"></span><span class="thread-label">Discussion</span></a></li>
+<li><a href="#limitations" data-target="limitations"><span class="knot"></span><span class="thread-label">Limitations</span></a></li>
+<li><a href="#conclusion" data-target="conclusion"><span class="knot"></span><span class="thread-label">Conclusion</span></a></li>
+<li><a href="#references" data-target="references"><span class="knot"></span><span class="thread-label">References</span></a></li>
+<li><a href="#appendices" data-target="appendices"><span class="knot"></span><span class="thread-label">Appendices</span></a></li>
+</ul>
+</nav><section class="hero" id="hero">
+  <p class="hero-eyebrow">Research Report &middot; JSPS KAKENHI JP 20KK0300 / JP 20K13914</p>
+  <h1>Adverse Childhood Experiences &amp; Resilience Development in Ethnic Minority Preschool Children</h1>
+  <p class="hero-sub">The role of parental care, early childhood education, and community support in Chiang Mai and Chiang Rai, Northern Thailand.</p>
+  <p class="hero-authors">Prapassara Thanosawan, PhD (University of Sydney)<br>
+  Nuttapa Thanosawan, PhD (Waseda University)<br>
+  March 2024</p>
+  <div class="hero-stats">
+    <div><div class="hero-stat-num">224</div><div class="hero-stat-label">total participants in the study</div></div>
+    <div><div class="hero-stat-num">149</div><div class="hero-stat-label">questionnaire respondents &mdash; parents &amp; teachers</div></div>
+    <div><div class="hero-stat-num">65</div><div class="hero-stat-label">semi-structured interviews</div></div>
+    <div><div class="hero-stat-num">79</div><div class="hero-stat-label">questionnaire items modelled with GLMs</div></div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span><span>scroll</span></div>
+</section>
+<section class="block band-a" id="abstract">
+<div class="block-inner">
+<h2 class="sec-title">Abstract</h2>
+
+<p>Ethnic minority children in Northern Thailand are exposed to elevated rates of Adverse Childhood Experiences (ACEs), yet little research has examined the protective factors that support resilience in this population. This mixed-methods study investigated how parental care, early childhood education, and community support relate to perceptions of resilience among ethnic minority children in Chiang Mai and Chiang Rai provinces. Quantitative data were collected from 50 parents/caregivers and 99 teachers/practitioners using structured questionnaires, and qualitative data were collected through semi-structured interviews. Generalised linear models (GLMs) tested associations between demographic and contextual predictors and survey responses; thematic analysis was used to identify resilience-promoting strategies described by parents and teachers. Demographic and contextual predictors significantly improved model fit for 31 of 48 parent-questionnaire items (65%) and 11 of 31 teacher-questionnaire items (35%). Thematic analysis identified active listening, promotion of autonomy, and consistent emotional and physical presence as central parental strategies, and safe classroom environments, emotional-regulation instruction, and strengths-based teaching as central teacher strategies. Findings suggest that parental and educational predictors of resilience-related perceptions differ in strength and pattern between caregivers and educators, with implications for the design of family-centred and school-based interventions for ethnic minority children affected by ACEs.</p>
+<p><em>Keywords:</em> adverse childhood experiences, resilience, ethnic minority children, early childhood education, Thailand</p>
+
+<div class="ack-note"><p class="ack-label">Acknowledgements</p><p>This research was supported by Grants-in-Aid from the Japan Society for the Promotion of Science (JSPS KAKENHI JP 20KK0300 and JP 20K13914). We thank the parents, caregivers, teachers, and practitioners in Chiang Mai and Chiang Rai who generously shared their time and experiences, without whom this study would not have been possible.</p></div>
+</div>
+</section>
+
+<section class="block band-b" id="introduction">
+<div class="block-inner">
+<h2 class="sec-title">Introduction</h2>
+
+<p>Adverse Childhood Experiences (ACEs) — including abuse, neglect, and household dysfunction — are associated with substantial short- and long-term harm to health, wellbeing, and developmental trajectories (Danese &amp; McEwen, 2012; Felitti et al., 1998). Resilience, broadly defined as the capacity to adapt and thrive despite adversity, has been identified as a key factor that can buffer children against the negative sequelae of ACEs (Ortiz, 2019). Children from ethnic minority communities are frequently exposed to compounding sources of adversity — socioeconomic hardship, discrimination, and limited access to services — that increase both their exposure to ACEs and the urgency of identifying protective factors specific to their circumstances (Phakakorn et al., 2018, 2019).</p>
+<p>Despite a substantial international literature on ACEs, comparatively little research has examined how parental care, early childhood education, and community support interact to shape resilience among ethnic minority children in Southeast Asia. This study addresses that gap by examining ethnic minority communities in Chiang Mai and Chiang Rai provinces in Northern Thailand, drawing on the perspectives of parents/caregivers and teachers/practitioners who support these children directly.</p>
+<h3 class="sub" id="research-questions">Research Questions</h3>
+<p>This study was guided by four sets of research questions:</p>
+<ol type="1">
+<li><strong>Challenges and manifestations of ACEs.</strong> What specific challenges do children, parents, and educators in ethnic minority communities face in relation to ACEs, and how do cultural, social, and economic factors shape these challenges?</li>
+<li><strong>Parental care and resilience.</strong> How does parental care influence resilience and healthy development among ethnic minority children, and what contextual factors shape parenting practices?</li>
+<li><strong>Early childhood education.</strong> How does access to early childhood education contribute to resilience, and which programme features matter most for children exposed to ACEs?</li>
+<li><strong>Community support systems.</strong> What community support systems are currently available to these families, and how might they be strengthened?</li>
+</ol>
+<h3 class="sub" id="research-purposes">Research Purposes</h3>
+<p>The study aimed to identify protective factors associated with resilience in ethnic minority children exposed to ACEs, and to translate these findings into guidance for early intervention. Two data sources were used to this end. Semi-structured interviews with parents and teachers were analysed thematically, using an inductive approach to identify themes describing how resilience is fostered in practice (Creswell &amp; Creswell, 2018). Questionnaire surveys collected demographic information, perceptions of ACEs, parental care practices, engagement with early childhood education and welfare services, and perceived barriers to support; responses were analysed using generalised linear models to test which contextual and demographic factors were associated with item-level responses.</p>
+<p>Early childhood education is a particular focus of this study because, in the Thai context, enrolment in registered preschools can determine children’s later access to public schooling and identification documentation — with material consequences for socioeconomic integration that extend well beyond early learning outcomes (Phakakorn et al., 2018; Walker &amp; Walsh, 2015). Schools and early childhood settings are also where many at-risk children first come into contact with adults positioned to recognise and respond to signs of adversity (Walker &amp; Walsh, 2015), making the school-family relationship a central object of inquiry in this study.</p>
+
+</div>
+</section>
+<section class="block band-a" id="significance-of-the-study">
+<div class="block-inner">
+<h2 class="sec-title">Significance of the Study</h2>
+
+<p>This research contributes to four audiences. For <strong>families and communities</strong>, the findings identify culturally grounded, practical strategies that parents already use to support resilience, which can inform peer- and community-based dissemination. For <strong>educators and practitioners</strong>, the findings clarify which trauma-informed practices and classroom strategies are most consistently described as effective by teachers working with ethnic minority children. For <strong>policymakers</strong>, the study provides empirical grounding for resourcing decisions around early childhood education and welfare services in marginalised regions of Northern Thailand. For <strong>the ACEs literature</strong>, the study extends existing research — conducted predominantly in North American and European contexts — to an understudied population, and reports parent- and teacher-level data side by side, allowing direct comparison between caregiving and educational perspectives on the same construct.</p>
+
+</div>
+</section>
+
+<section class="block band-b" id="literature-review">
+<div class="block-inner">
+<h2 class="sec-title">Literature Review</h2>
+
+<h3 class="sub" id="aces-and-long-term-outcomes">ACEs and Long-Term Outcomes</h3>
+<p>The foundational ACE Study surveyed more than 17,000 adults about seven categories of childhood adversity and found a strong, graded relationship between cumulative ACE exposure and later-life risk for leading causes of death and disease, independent of other demographic factors (Felitti et al., 1998). Subsequent work extended this dose–response model to mental health, cognitive function, and socioeconomic outcomes, and showed that the consequences of ACEs are not distributed evenly: historically disadvantaged groups tend to carry a disproportionate share of both ACE exposure and its downstream effects (Danese &amp; McEwen, 2012). Individuals with six or more ACEs face substantially elevated odds of alcoholism, substance use, depression, and suicide attempt, and those with the highest ACE scores show up to a twelvefold increase in risk for conditions such as heart disease, cancer, and chronic lung disease relative to those with no reported ACEs (Felitti &amp; Anda, 2010).</p>
+<p>Biologically, ACEs are understood to disrupt <em>allostasis</em> — the body’s adaptive stress-regulation system — producing dysregulation in hormonal and immune function, altered brain development, and accelerated cellular ageing, which together compound risk for disease across the lifespan (Danese &amp; McEwen, 2012). Behaviourally and psychosocially, ACEs are associated with increased risk of psychosocial disorder in adulthood (Maughan &amp; McCarthy, 1997), early-onset behavioural problems — observed in approximately 70% of children with three or more ACEs by age six (Clarkson Freeman, 2014) — and reduced adaptive behaviour and academic achievement in middle childhood (McKelvey et al., 2018). Associations between ACE exposure and adult aggression and lowered self-esteem have also been documented, with physical abuse and bullying showing the strongest negative association with self-esteem (Khodabandeh et al., 2018).</p>
+<p>Taken together, this literature establishes ACEs as a robust, multi-system determinant of health and developmental risk, and underscores the importance of early detection and intervention in disrupting the transmission of harm across the lifespan and across generations (Felitti &amp; Anda, 2010).</p>
+<h3 class="sub" id="structural-disparities-facing-ethnic-minority-communities-in-thailand">Structural Disparities Facing Ethnic Minority Communities in Thailand</h3>
+<p>Ethnic minority communities in Northern Thailand face compounding structural disadvantages that elevate both ACE exposure and barriers to support. In <strong>education</strong>, financial constraints, geographic isolation, and cultural barriers contribute to lower enrolment and higher dropout rates than the national average; in some cases, children are denied primary school enrolment because they did not attend kindergarten, revealing a structural gap in the educational pipeline (Phakakorn et al., 2018). In <strong>healthcare</strong>, geographic remoteness and limited financial resources are associated with disproportionate rates of malnutrition, preventable disease, and maternal mortality relative to national averages (Ratanasuwan et al., 2020). In <strong>housing</strong>, overcrowded and poorly maintained dwellings increase exposure to environmental hazards, compounding existing socioeconomic disadvantage (Phakakorn et al., 2019).</p>
+<p>Government programmes addressing these disparities exist but are frequently constrained by limited resourcing, inconsistent implementation, and insufficient cultural responsiveness. Where government provision falls short, individuals and community organisations play a substantial complementary role — through direct service volunteering, NGO-funded programming, and advocacy that raises awareness of ethnic minority communities’ needs among policymakers and the public. The literature is consistent in suggesting that durable improvement requires coordinated effort across government, community organisations, and families, rather than any single actor working in isolation (Phakakorn et al., 2018, 2019; Ratanasuwan et al., 2020).</p>
+<h3 class="sub" id="building-resilience-in-children-facing-adversity">Building Resilience in Children Facing Adversity</h3>
+<p>Resilience — the capacity to adapt and thrive despite adversity — is widely regarded as the primary protective mechanism buffering children from the negative sequelae of ACEs (Ortiz, 2019). Five components of resilience-building recur across the literature.</p>
+<p><strong>Trusted adult relationships.</strong> The presence of a consistent, caring adult — a parent, teacher, or mentor — is among the most robust predictors of childhood resilience. Ashton et al. (2021) found that access to a trusted adult decreases as ACE count increases, but that even one or two such relationships substantially raise the resilience resources a child can draw on; these relationships provide emotional security and support the development of self-esteem and problem-solving capacity.</p>
+<p><strong>Early childhood education.</strong> Quality early childhood education provides a safe, structured environment in which cognitive, social, and emotional skills can develop, and is often the first setting in which developmental delays or behavioural concerns are identified (Thai Ministry of Education, 2020; Walker &amp; Walsh, 2015). For ethnic minority children specifically, enrolment can also function as a structural bridge to later access to public schooling and identification documentation, extending the benefit of early education beyond the classroom (Phakakorn et al., 2018).</p>
+<p><strong>Innovative interventions.</strong> Music- and movement-based interventions offer a non-verbal channel through which children can process traumatic experience while building self-regulation, self-esteem, and social connection (McFerran &amp; Rickson, 2014; Nijs &amp; Nicolaou, 2021).</p>
+<p><strong>Early detection and intervention.</strong> Felitti and Anda (2010) emphasise that timely identification — through screening tools that assess ACE exposure and existing protective factors — allows support to be tailored to a child’s specific circumstances rather than applied generically, and is more effective the earlier it occurs.</p>
+<p><strong>Collaborative, multi-level effort.</strong> No single actor can address resilience in isolation. Effective approaches integrate trauma-informed practice across families, schools, healthcare settings, and community programmes, supported by ongoing practitioner training (Bronfenbrenner, 1979).</p>
+<p>Reviewing factors that differentiate resilient from non-resilient outcomes, Masten and Barnes (2018) identify positive appraisal style — the capacity to reframe adversity constructively — and strong executive function as central individual-level resilience factors, alongside parenting practices, maternal mental health, and consistent household routines as key family-level factors. At the same time, ACEs remain a robust risk factor for depression; Elmore et al. (2020) found that resilience mediates this relationship, meaning that interventions which build resilience may simultaneously reduce depression risk even where ACE exposure itself cannot be changed. This mediating role gives resilience-building practical value as an intervention target independent of primary ACE prevention.</p>
+<h3 class="sub" id="synthesis-and-research-gap">Synthesis and Research Gap</h3>
+<p>This literature establishes that ACEs carry serious, well-documented long-term costs, and that resilience — supported by trusted relationships, quality early education, and coordinated multi-level effort — is the primary mechanism through which those costs can be mitigated. However, the evidence base underpinning this model is drawn predominantly from North American and European populations. Comparatively little is known about how these mechanisms operate among ethnic minority families in Southeast Asia, where structural disadvantage, cultural norms around parenting and education, and the role of preschool enrolment in determining access to public services differ meaningfully from the contexts in which the existing literature was generated. This study addresses that gap by examining parent- and teacher-reported data from ethnic minority communities in Northern Thailand, combining quantitative modelling of survey responses with thematic analysis of interview data to characterise both the prevalence of protective factors and the practical strategies through which they are enacted.</p>
+
+</div>
+</section>
+
+<section class="block band-a" id="method">
+<div class="block-inner">
+<h2 class="sec-title">Method</h2>
+
+<h3 class="sub" id="design">Design</h3>
+<p>This study used a concurrent mixed-methods design (Creswell &amp; Creswell, 2018), combining quantitative questionnaire data with qualitative semi-structured interview data to provide a comprehensive picture of ACEs and resilience-related factors in the study communities. Quantitative data allowed testing of associations between demographic/contextual predictors and item-level survey responses; qualitative data allowed the specific strategies underlying those associations to be described in participants’ own terms. Data collection took place in ethnic minority communities in Chiang Mai and Chiang Rai provinces, Northern Thailand, between March 2022 and June 2023.</p>
+<h3 class="sub" id="participants">Participants</h3>
+<p>The total study sample comprised 224 participants. Questionnaire data were collected from 50 parents/caregivers and 99 teachers/practitioners (<em>N</em> = 149). Semi-structured interviews were conducted with a subset of 15 parents/caregivers and 50 teachers/practitioners. Parent/caregiver participants were drawn predominantly from the Tai ethnic group and varied in age, education, and household income; teacher/practitioner participants varied in role, workplace setting, and years of experience in early childhood education. Participants were recruited through convenience and snowball sampling.</p>
+<h3 class="sub" id="procedure">Procedure</h3>
+<p>Data were collected through three complementary methods. <strong>Questionnaire surveys</strong> were administered on paper and online to parents/caregivers and teachers/practitioners, collecting demographic information together with Likert-scale items on ACEs, parental care, early childhood education and welfare, and perceived barriers to support. <strong>Semi-structured interviews</strong> were conducted at kindergartens and schools across the study sites during May and June 2023, exploring participants’ direct experiences and perspectives in greater depth than the survey format allowed. <strong>Field observations</strong> in kindergartens, schools, and community settings provided contextual information used to interpret survey and interview findings.</p>
+<h3 class="sub" id="instruments">Instruments</h3>
+<p>The <strong>parent/caregiver questionnaire</strong> comprised ten sections covering demographic information, perceptions of ACEs (items 13–20), parental care (21–25), early childhood education and welfare (26–33), perceptions of education and parental care (34–40), perceived barriers to supporting children with ACEs (41–45), parents’ own ACE history (46–51), household environment (52–57), perceived benefits of combined parental/educational support (58–62), and access to state-provided services (63–65). The <strong>teacher/practitioner questionnaire</strong> comprised six sections covering demographic information, perceptions of ACEs (items 9–16), early childhood education and welfare (17–24), perceptions of these programmes (25–30), confidence in supporting affected children (31–34), and perceived barriers to providing support (35–39). Full item wording is provided in Appendices A and B. Both instruments were developed from the literature review, refined through cognitive pre-testing (Collins, 2003), and reviewed by subject-matter experts for clarity and cultural appropriateness prior to administration.</p>
+<p>Interview protocols (Appendices C and D) used open-ended questions that moved from participants’ direct experience of ACEs, through specific coping and support strategies used at home or in the classroom, to perceived barriers and policy-relevant recommendations.</p>
+<h3 class="sub" id="hypotheses">Hypotheses</h3>
+<p><strong>H1:</strong> Parental care, early childhood education, and community services are positively associated with resilience-related perceptions among ethnic minority children in Northern Thailand. <strong>H2:</strong> Resilience is positively associated with healthy developmental outcomes among ethnic minority children in Northern Thailand.</p>
+<p>The corresponding null hypotheses (no association in either case) were tested against these alternatives.</p>
+<h3 class="sub" id="data-analysis">Data Analysis</h3>
+<p><strong>Quantitative analysis.</strong> Descriptive statistics characterised the demographic profile of each sample and the distribution of responses to each questionnaire item. Because Shapiro–Wilk tests indicated significant departure from normality for the large majority of items (consistent with ordinal Likert-type response data), generalised linear models (GLMs) were used in preference to standard linear regression to test whether demographic and contextual predictors improved model fit relative to a null (intercept-only) model, for each survey item in turn (Brown &amp; Green, 2017; Garcia et al., 2021). Model comparison used likelihood-ratio chi-square tests on the deviance difference between null (H₀) and full (H₁) models, with Akaike (AIC) and Bayesian (BIC) information criteria reported alongside. Analyses were conducted in JASP (version 0.18.3.0).</p>
+<p><strong>Qualitative analysis.</strong> Interview transcripts were analysed using inductive thematic analysis (Braun et al., 2019), following the stages of familiarisation, initial coding, theme identification, iterative refinement through constant comparison, and organisation into a coherent thematic framework. Coding was conducted in Taguette (version 1.4.1).</p>
+<p><strong>Note on demographic variables.</strong> Several demographic variables (e.g., parent age, education, income; teacher age, education, position) were recorded as ordinal categories rather than continuous measures. Descriptive statistics for these variables (Table 1) should be read as describing the <em>coded category</em> (e.g., “category 3 of 5”) rather than a value in original units (e.g., years of age); the original source draft repeatedly translated category means directly into implied real-world units (for example, treating a mean age-category score of 3.12 as “31.2 years”), which is not a valid inference without the underlying category boundaries. This report uses category-level language throughout and the category boundaries (e.g., what age range “category 3” represents) should be confirmed against the original instrument before any year/Baht-denominated values are reported externally.</p>
+
+</div>
+</section>
+
+<section class="block band-b" id="results">
+<div class="block-inner">
+<h2 class="sec-title">Results</h2>
+
+<h3 class="sub">Sample Characteristics</h3>
+<p>Table 1 summarises the demographic profile of the parent/caregiver sample (<em>N</em> = 50), and Table 3 summarises the teacher/practitioner sample (<em>N</em> = 99). Age, education, income, and similar variables were recorded as ordinal categories; means and standard deviations below describe the coded category, not a value in original units.</p>
+
+<div class="demo-grid">
+  <div class="demo-card">
+    <p class="demo-card-label">Parent / Caregiver sample</p>
+    <p class="demo-card-n">N = 50</p>
+    <table class="demo-table">
+      <thead><tr><th></th><th>Age</th><th>Gender</th><th>Educ.</th><th>Income</th><th>Family size</th><th>Child age</th><th>Child gender</th></tr></thead>
+      <tbody>
+        <tr><td>Mode</td><td>3</td><td>2</td><td>3</td><td>3</td><td>4</td><td>6</td><td>1</td></tr>
+        <tr><td><em>M</em></td><td>3.12</td><td>1.60</td><td>3.86</td><td>2.94</td><td>3.90</td><td>4.60</td><td>1.50</td></tr>
+        <tr><td><em>SD</em></td><td>0.75</td><td>0.50</td><td>1.97</td><td>0.51</td><td>1.36</td><td>1.97</td><td>0.51</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="demo-card">
+    <p class="demo-card-label">Teacher / Practitioner sample</p>
+    <p class="demo-card-n">N = 99</p>
+    <table class="demo-table">
+      <thead><tr><th></th><th>Age</th><th>Gender</th><th>Educ.</th><th>Position</th><th>Workplace</th><th>Experience</th><th>ACE PD</th></tr></thead>
+      <tbody>
+        <tr><td>Mode</td><td>3</td><td>2</td><td>5</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+        <tr><td><em>M</em></td><td>3.67</td><td>1.87</td><td>5.04</td><td>2.09</td><td>2.09</td><td>2.85</td><td>1.61</td></tr>
+        <tr><td><em>SD</em></td><td>1.06</td><td>0.37</td><td>0.76</td><td>1.32</td><td>0.78</td><td>1.37</td><td>0.49</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p class="note">Note. Parents/caregivers skewed female (Mode = 2, coded female). Teachers/practitioners were concentrated in the higher education categories and reported moderate childcare experience. Full distributions (variance, range, min&ndash;max) are in the downloadable report.</p>
+
+<h3 class="sub">Item-Level Descriptive Statistics</h3>
+<p>Shapiro&ndash;Wilk tests indicated significant departure from normality for nearly every item in both samples (<em>p</em> &lt; .001), consistent with ordinal Likert-type data &mdash; the basis for using generalised linear models rather than standard linear regression below.</p>
+
+<details class="data-disclosure">
+  <summary>Table 2 &mdash; Parent/caregiver item descriptives (50 items)</summary>
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>#</th><th>Item</th><th><em>n</em></th><th><em>M</em></th><th><em>SD</em></th><th>Var.</th><th><em>W</em></th><th><em>p</em></th><th>Range</th></tr></thead>
+    <tbody>
+    <tr><td class='num'>13</td><td class='lbl'>Have difficulty trusting others</td><td>50</td><td>3.44</td><td>0.705</td><td>0.496</td><td>0.793</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>14</td><td class='lbl'>Often feel guilty or responsible for what…</td><td>50</td><td>3.16</td><td>0.866</td><td>0.749</td><td>0.828</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>15</td><td class='lbl'>Struggle with emotional regulation</td><td>50</td><td>3.26</td><td>0.922</td><td>0.849</td><td>0.834</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>16</td><td class='lbl'>Have difficulty forming healthy relationships…</td><td>50</td><td>3.28</td><td>0.904</td><td>0.818</td><td>0.78</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>17</td><td class='lbl'>Struggle with academic achievement</td><td>50</td><td>3.3</td><td>0.886</td><td>0.786</td><td>0.818</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>18</td><td class='lbl'>Often feel anxious or depressed</td><td>50</td><td>3.04</td><td>0.88</td><td>0.774</td><td>0.857</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>19</td><td class='lbl'>Have a higher risk of engaging in risky…</td><td>50</td><td>3.28</td><td>0.834</td><td>0.696</td><td>0.798</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>20</td><td class='lbl'>May have difficulty with impulse control</td><td>50</td><td>3.36</td><td>0.898</td><td>0.807</td><td>0.813</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>21</td><td class='lbl'>Parents or caregivers play an important role…</td><td>50</td><td>4.7</td><td>0.707</td><td>0.5</td><td>0.486</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>22</td><td class='lbl'>Providing a safe and supportive home…</td><td>50</td><td>4.68</td><td>0.653</td><td>0.426</td><td>0.553</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>23</td><td class='lbl'>Being a positive role model can help children…</td><td>50</td><td>4.74</td><td>0.565</td><td>0.319</td><td>0.512</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>24</td><td class='lbl'>Being a good listener and providing emotional…</td><td>50</td><td>4.86</td><td>0.405</td><td>0.164</td><td>0.389</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>25</td><td class='lbl'>Being involved in the child's education and…</td><td>50</td><td>4.76</td><td>0.591</td><td>0.349</td><td>0.466</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>26</td><td class='lbl'>Build resilience</td><td>50</td><td>4.58</td><td>0.731</td><td>0.534</td><td>0.628</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>27</td><td class='lbl'>Can provide children with a safe and…</td><td>50</td><td>4.64</td><td>0.525</td><td>0.276</td><td>0.64</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>28</td><td class='lbl'>Develop social and emotional skills</td><td>50</td><td>4.78</td><td>0.507</td><td>0.257</td><td>0.486</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>29</td><td class='lbl'>Succeed academically</td><td>50</td><td>4.66</td><td>0.658</td><td>0.433</td><td>0.559</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>30</td><td class='lbl'>Develop positive relationships with peers and…</td><td>50</td><td>4.6</td><td>0.606</td><td>0.367</td><td>0.657</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>31</td><td class='lbl'>Develop a sense of belonging and purpose</td><td>50</td><td>4.52</td><td>0.58</td><td>0.336</td><td>0.704</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>32</td><td class='lbl'>Feel more confident and empowered</td><td>50</td><td>4.6</td><td>0.606</td><td>0.367</td><td>0.657</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>33</td><td class='lbl'>Overcome the negative effects of adverse…</td><td>50</td><td>4.54</td><td>0.613</td><td>0.376</td><td>0.696</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>34</td><td class='lbl'>Are effective in supporting children of ethnic…</td><td>50</td><td>4.58</td><td>0.575</td><td>0.33</td><td>0.677</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>35</td><td class='lbl'>Are important for promoting children's…</td><td>50</td><td>4.52</td><td>0.646</td><td>0.418</td><td>0.7</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>36</td><td class='lbl'>Should be a priority for government and…</td><td>50</td><td>4.68</td><td>0.471</td><td>0.222</td><td>0.588</td><td>< .001</td><td>1</td></tr>
+<tr><td class='num'>37</td><td class='lbl'>Should be accessible to all children,…</td><td>50</td><td>4.7</td><td>0.763</td><td>0.582</td><td>0.458</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>38</td><td class='lbl'>Parents or caregivers play a crucial role in…</td><td>50</td><td>4.9</td><td>0.364</td><td>0.133</td><td>0.304</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>39</td><td class='lbl'>Confident in my ability to support my child…</td><td>50</td><td>4.36</td><td>0.663</td><td>0.439</td><td>0.763</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>40</td><td class='lbl'>Equipped to provide my child with the support…</td><td>50</td><td>4.64</td><td>0.631</td><td>0.398</td><td>0.601</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>41</td><td class='lbl'>Limited resources (e.g., funding, materials)…</td><td>50</td><td>4.1</td><td>0.735</td><td>0.541</td><td>0.735</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>42</td><td class='lbl'>Cultural and language barriers make it…</td><td>50</td><td>3.74</td><td>0.803</td><td>0.645</td><td>0.829</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>43</td><td class='lbl'>Stigma and shame surrounding adverse childhood…</td><td>50</td><td>3.42</td><td>0.758</td><td>0.575</td><td>0.748</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>44</td><td class='lbl'>Limited knowledge or training in…</td><td>50</td><td>3.38</td><td>0.725</td><td>0.526</td><td>0.748</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>45</td><td class='lbl'>High workload or other personal or family…</td><td>50</td><td>3.78</td><td>0.84</td><td>0.706</td><td>0.824</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>46</td><td class='lbl'>Experienced any adverse childhood experiences…</td><td>50</td><td>2.86</td><td>1.03</td><td>1.062</td><td>0.871</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>48</td><td class='lbl'>Sought help or support for your own…</td><td>50</td><td>2.3</td><td>0.886</td><td>0.786</td><td>0.825</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>49</td><td class='lbl'>Talked to your child about your own…</td><td>50</td><td>3</td><td>1.143</td><td>1.306</td><td>0.911</td><td>0.001</td><td>4</td></tr>
+<tr><td class='num'>50</td><td class='lbl'>Believe that your own experiences of adverse…</td><td>50</td><td>2.8</td><td>1.195</td><td>1.429</td><td>0.883</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>52</td><td class='lbl'>Live in a safe and supportive environment</td><td>50</td><td>4.1</td><td>1.055</td><td>1.112</td><td>0.791</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>53</td><td class='lbl'>Feel supported by your family and community</td><td>50</td><td>3.64</td><td>0.875</td><td>0.766</td><td>0.848</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>54</td><td class='lbl'>Have access to resources (e.g., financial,…</td><td>50</td><td>3.6</td><td>0.948</td><td>0.898</td><td>0.799</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>55</td><td class='lbl'>Feel that your child has access to adequate…</td><td>50</td><td>3.96</td><td>0.925</td><td>0.856</td><td>0.846</td><td>< .001</td><td>4</td></tr>
+<tr><td class='num'>56</td><td class='lbl'>Feel that your child has access to nutritious…</td><td>50</td><td>4.36</td><td>0.776</td><td>0.602</td><td>0.737</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>57</td><td class='lbl'>Perceive that your child has access to higher…</td><td>50</td><td>4.42</td><td>0.835</td><td>0.698</td><td>0.702</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>58</td><td class='lbl'>Parental care, early childhood education, and…</td><td>50</td><td>4.5</td><td>0.614</td><td>0.378</td><td>0.715</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>59</td><td class='lbl'>Parents or caregivers can play a crucial role…</td><td>50</td><td>4.68</td><td>0.551</td><td>0.304</td><td>0.604</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>60</td><td class='lbl'>Early childhood education and welfare can…</td><td>50</td><td>4.52</td><td>0.614</td><td>0.377</td><td>0.706</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>61</td><td class='lbl'>Parental involvement in education and early…</td><td>50</td><td>4.78</td><td>0.507</td><td>0.257</td><td>0.486</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>62</td><td class='lbl'>A strong relationship between preschool…</td><td>50</td><td>4.82</td><td>0.482</td><td>0.232</td><td>0.422</td><td>< .001</td><td>2</td></tr>
+<tr><td class='num'>63</td><td class='lbl'>If your child experiences Adverse Childhood…</td><td>50</td><td>3.72</td><td>0.784</td><td>0.614</td><td>0.83</td><td>< .001</td><td>3</td></tr>
+<tr><td class='num'>64</td><td class='lbl'>If you encounter adverse childhood experiences…</td><td>50</td><td>3.16</td><td>0.766</td><td>0.586</td><td>0.844</td><td>< .001</td><td>4</td></tr>
+    </tbody>
+  </table>
+  </div>
+</details>
+
+<details class="data-disclosure">
+  <summary>Table 4 &mdash; Teacher/practitioner item descriptives (31 items)</summary>
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>#</th><th>Item</th><th><em>n</em></th><th><em>M</em></th><th><em>SD</em></th><th>Var.</th><th><em>W</em></th><th><em>p</em></th><th>Range</th></tr></thead>
+    <tbody>
+    <tr><td class='num'>9</td><td class='lbl'>Have difficulty trusting others</td><td>99</td><td>4.202</td><td>0.769</td><td>0.591</td><td>0.810</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>10</td><td class='lbl'>Often feel guilty or responsible for what…</td><td>99</td><td>3.727</td><td>1.008</td><td>1.017</td><td>0.854</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>11</td><td class='lbl'>Struggle with emotional regulation</td><td>99</td><td>4.061</td><td>0.924</td><td>0.853</td><td>0.834</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>12</td><td class='lbl'>Have difficulty forming healthy relationships…</td><td>99</td><td>4.000</td><td>0.958</td><td>0.918</td><td>0.837</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>13</td><td class='lbl'>Struggle with academic achievement</td><td>99</td><td>3.990</td><td>0.863</td><td>0.745</td><td>0.844</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>14</td><td class='lbl'>Often feel anxious or depressed</td><td>99</td><td>3.929</td><td>0.884</td><td>0.781</td><td>0.857</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>15</td><td class='lbl'>Have a higher risk of engaging in risky…</td><td>99</td><td>4.081</td><td>0.997</td><td>0.993</td><td>0.795</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>16</td><td class='lbl'>May have difficulty with impulse control</td><td>99</td><td>3.990</td><td>0.898</td><td>0.806</td><td>0.834</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>17</td><td class='lbl'>Build resilience</td><td>99</td><td>4.091</td><td>0.784</td><td>0.614</td><td>0.824</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>18</td><td class='lbl'>Can provide children with a safe and…</td><td>99</td><td>4.162</td><td>0.792</td><td>0.627</td><td>0.812</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>19</td><td class='lbl'>Develop social and emotional skills</td><td>99</td><td>4.404</td><td>0.588</td><td>0.345</td><td>0.733</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>20</td><td class='lbl'>Succeed academically</td><td>99</td><td>4.071</td><td>0.759</td><td>0.577</td><td>0.806</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>21</td><td class='lbl'>Develop positive relationships with peers and…</td><td>99</td><td>4.323</td><td>0.697</td><td>0.486</td><td>0.771</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>22</td><td class='lbl'>Develop a sense of belonging and purpose</td><td>99</td><td>4.172</td><td>0.686</td><td>0.470</td><td>0.795</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>23</td><td class='lbl'>Feel more confident and empowered</td><td>99</td><td>4.354</td><td>0.644</td><td>0.415</td><td>0.761</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>24</td><td class='lbl'>Overcome the negative effects of adverse…</td><td>99</td><td>4.121</td><td>0.773</td><td>0.597</td><td>0.826</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>25</td><td class='lbl'>Are effective in supporting children of ethnic…</td><td>99</td><td>4.172</td><td>0.783</td><td>0.613</td><td>0.802</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>26</td><td class='lbl'>It is important to promote resilience in…</td><td>99</td><td>4.273</td><td>0.697</td><td>0.486</td><td>0.789</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>27</td><td class='lbl'>Require support from the government and local…</td><td>99</td><td>4.283</td><td>0.881</td><td>0.776</td><td>0.768</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>28</td><td class='lbl'>Early childhood education teachers and…</td><td>99</td><td>4.515</td><td>0.612</td><td>0.375</td><td>0.706</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>29</td><td class='lbl'>Play a crucial role in promoting resilience in…</td><td>99</td><td>4.354</td><td>0.812</td><td>0.659</td><td>0.745</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>30</td><td class='lbl'>Should be accessible to all children,…</td><td>99</td><td>4.444</td><td>0.626</td><td>0.392</td><td>0.725</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>31</td><td class='lbl'>Confident in providing support to children who…</td><td>99</td><td>4.000</td><td>0.742</td><td>0.551</td><td>0.833</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>32</td><td class='lbl'>Comfortable discussing children's experiences…</td><td>99</td><td>4.121</td><td>0.689</td><td>0.475</td><td>0.808</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>33</td><td class='lbl'>Equipped to foster resilience in children who…</td><td>99</td><td>4.242</td><td>0.716</td><td>0.512</td><td>0.788</td><td>< .001</td><td>2.000</td></tr>
+<tr><td class='num'>34</td><td class='lbl'>Supported by my colleagues and the community…</td><td>99</td><td>4.121</td><td>0.773</td><td>0.597</td><td>0.821</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>35</td><td class='lbl'>Limited resources (funding, materials, etc.)…</td><td>99</td><td>4.343</td><td>0.771</td><td>0.595</td><td>0.764</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>36</td><td class='lbl'>Cultural and language barriers make it…</td><td>99</td><td>4.222</td><td>0.852</td><td>0.726</td><td>0.797</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>37</td><td class='lbl'>Stigma and shame surrounding adverse childhood…</td><td>99</td><td>3.909</td><td>1.031</td><td>1.063</td><td>0.844</td><td>< .001</td><td>4.000</td></tr>
+<tr><td class='num'>38</td><td class='lbl'>Limited knowledge or training in…</td><td>99</td><td>4.081</td><td>0.888</td><td>0.789</td><td>0.828</td><td>< .001</td><td>3.000</td></tr>
+<tr><td class='num'>39</td><td class='lbl'>High case-loads or workload limit the time and…</td><td>99</td><td>4.202</td><td>0.845</td><td>0.714</td><td>0.804</td><td>< .001</td><td>3.000</td></tr>
+    </tbody>
+  </table>
+  </div>
+</details>
+
+<h3 class="sub">Predictors of Item-Level Responses: Generalised Linear Models</h3>
+<p>For each item, a GLM tested whether demographic and contextual predictors (full model, H&#8321;) improved fit relative to a null model (H&#8320;), using a likelihood-ratio &chi;&sup2; test on the deviance difference.</p>
+
+<div class="sig-chart" role="img" aria-label="31 of 48 parent items significant, 65 percent. 11 of 31 teacher items significant, 35 percent.">
+  <div class="sig-row">
+    <span class="sig-label">Parents / caregivers</span>
+    <div class="sig-track"><div class="sig-fill ochre" style="width:65%"><span class="sig-fill-text">31 / 48 items &middot; 65%</span></div></div>
+  </div>
+  <div class="sig-row">
+    <span class="sig-label">Teachers / practitioners</span>
+    <div class="sig-track"><div class="sig-fill madder" style="width:35%"><span class="sig-fill-text">11 / 31 items &middot; 35%</span></div></div>
+  </div>
+  <p class="sig-caption">Share of questionnaire items for which demographic/contextual predictors significantly improved model fit (<em>p</em> &lt; .05)</p>
+</div>
+
+<p>Among parents/caregivers, non-significant items clustered around beliefs about ACEs in the abstract, parents&rsquo; own ACE history and disclosure, and household resource access &mdash; areas where unmeasured factors such as stigma or service availability likely carry more explanatory weight than age, education, income, or family size. Among teachers/practitioners, significant items concentrated in early ACE-perception and welfare-barrier items, while confidence and classroom-practice items showed little demographic differentiation &mdash; suggesting these perceptions are shaped more by shared professional training or school culture than by individual background.</p>
+
+<details class="data-disclosure">
+  <summary>Table 5 &mdash; GLM results, parent/caregiver items (48 items)</summary>
+  <div class="table-scroll">
+  <table class="data-table glm-table">
+    <thead><tr><th>#</th><th>Item</th><th>Dev. H&#8320;</th><th>AIC H&#8320;</th><th>BIC H&#8320;</th><th><em>df</em> H&#8320;</th><th>Dev. H&#8321;</th><th>AIC H&#8321;</th><th>BIC H&#8321;</th><th><em>df</em> H&#8321;</th><th>&chi;&sup2;</th><th><em>p</em></th></tr></thead>
+    <tbody>
+    <tr class='nonsig'><td class='num'>13</td><td class='lbl'>Have difficulty trusting others</td><td>24.32</td><td>109.858</td><td>113.682</td><td>49</td><td>6.903</td><td>102.89</td><td>160.251</td><td>21</td><td>17.417</td><td>0.068</td></tr>
+<tr class='sig'><td class='num'>14</td><td class='lbl'>Often feel guilty or responsible for what…</td><td>36.72</td><td>130.459</td><td>134.283</td><td>49</td><td>9.262</td><td>109.587</td><td>159.299</td><td>25</td><td>27.458</td><td>0.003</td></tr>
+<tr class='sig'><td class='num'>15</td><td class='lbl'>Struggle with emotional regulation</td><td>41.62</td><td>136.722</td><td>140.546</td><td>49</td><td>9.521</td><td>118.967</td><td>176.327</td><td>21</td><td>32.099</td><td>0.016</td></tr>
+<tr class='nonsig'><td class='num'>16</td><td class='lbl'>Have difficulty forming healthy relationships…</td><td>40.08</td><td>134.837</td><td>138.661</td><td>49</td><td>19.337</td><td>140.393</td><td>184.369</td><td>28</td><td>20.743</td><td>0.186</td></tr>
+<tr class='nonsig'><td class='num'>17</td><td class='lbl'>Struggle with academic achievement</td><td>38.5</td><td>132.826</td><td>136.65</td><td>49</td><td>13.103</td><td>134.933</td><td>192.294</td><td>21</td><td>25.397</td><td>0.19</td></tr>
+<tr class='nonsig'><td class='num'>18</td><td class='lbl'>Often feel anxious or depressed</td><td>37.92</td><td>132.067</td><td>135.891</td><td>49</td><td>10.473</td><td>123.73</td><td>181.091</td><td>21</td><td>27.447</td><td>0.057</td></tr>
+<tr class='sig'><td class='num'>19</td><td class='lbl'>Have a higher risk of engaging in risky…</td><td>34.08</td><td>126.728</td><td>130.552</td><td>49</td><td>8.134</td><td>111.095</td><td>168.456</td><td>21</td><td>25.946</td><td>0.022</td></tr>
+<tr class='sig'><td class='num'>20</td><td class='lbl'>May have difficulty with impulse control</td><td>39.52</td><td>134.133</td><td>137.957</td><td>49</td><td>9.772</td><td>120.269</td><td>177.63</td><td>21</td><td>29.748</td><td>0.028</td></tr>
+<tr class='sig'><td class='num'>21</td><td class='lbl'>Parents or caregivers play an important role…</td><td>24.5</td><td>110.226</td><td>114.05</td><td>49</td><td>4.312</td><td>79.361</td><td>136.722</td><td>21</td><td>20.188</td><td>0.002</td></tr>
+<tr class='sig'><td class='num'>22</td><td class='lbl'>Providing a safe and supportive home…</td><td>20.88</td><td>102.232</td><td>106.056</td><td>49</td><td>3.358</td><td>66.858</td><td>124.218</td><td>21</td><td>17.522</td><td>0.001</td></tr>
+<tr class='sig'><td class='num'>23</td><td class='lbl'>Being a positive role model can help children…</td><td>15.62</td><td>87.72</td><td>91.544</td><td>49</td><td>4.209</td><td>78.157</td><td>135.518</td><td>21</td><td>11.411</td><td>0.049</td></tr>
+<tr class='sig'><td class='num'>24</td><td class='lbl'>Being a good listener and providing emotional…</td><td>8.02</td><td>54.39</td><td>58.214</td><td>49</td><td>1.267</td><td>18.143</td><td>75.504</td><td>21</td><td>6.753</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>25</td><td class='lbl'>Being involved in the child's education and…</td><td>17.12</td><td>92.305</td><td>96.129</td><td>49</td><td>1.17</td><td>14.138</td><td>71.499</td><td>21</td><td>15.95</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>26</td><td class='lbl'>Build resilience</td><td>26.18</td><td>113.542</td><td>117.367</td><td>49</td><td>4.407</td><td>80.449</td><td>137.81</td><td>21</td><td>21.773</td><td>0.001</td></tr>
+<tr class='sig'><td class='num'>27</td><td class='lbl'>Can provide children with a safe and…</td><td>13.52</td><td>80.501</td><td>84.325</td><td>49</td><td>3.336</td><td>66.536</td><td>123.896</td><td>21</td><td>10.184</td><td>0.027</td></tr>
+<tr class='sig'><td class='num'>28</td><td class='lbl'>Develop social and emotional skills</td><td>12.58</td><td>76.898</td><td>80.722</td><td>49</td><td>2.903</td><td>59.579</td><td>116.94</td><td>21</td><td>9.677</td><td>0.017</td></tr>
+<tr class='sig'><td class='num'>29</td><td class='lbl'>Succeed academically</td><td>21.22</td><td>103.04</td><td>106.864</td><td>49</td><td>4.759</td><td>84.296</td><td>141.656</td><td>21</td><td>16.461</td><td>0.014</td></tr>
+<tr class='sig'><td class='num'>30</td><td class='lbl'>Develop positive relationships with peers and…</td><td>18</td><td>94.811</td><td>98.635</td><td>49</td><td>3.113</td><td>63.076</td><td>120.437</td><td>21</td><td>14.887</td><td>0.002</td></tr>
+<tr class='sig'><td class='num'>31</td><td class='lbl'>Develop a sense of belonging and purpose</td><td>16.48</td><td>90.4</td><td>94.224</td><td>49</td><td>2.783</td><td>57.477</td><td>114.838</td><td>21</td><td>13.697</td><td>0.002</td></tr>
+<tr class='sig'><td class='num'>32</td><td class='lbl'>Feel more confident and empowered</td><td>18</td><td>94.811</td><td>98.635</td><td>49</td><td>3.645</td><td>70.967</td><td>128.328</td><td>21</td><td>14.355</td><td>0.006</td></tr>
+<tr class='sig'><td class='num'>33</td><td class='lbl'>Overcome the negative effects of adverse…</td><td>18.42</td><td>95.965</td><td>99.789</td><td>49</td><td>2.763</td><td>57.118</td><td>114.478</td><td>21</td><td>15.657</td><td>< .001</td></tr>
+<tr class='nonsig'><td class='num'>34</td><td class='lbl'>Are effective in supporting children of ethnic…</td><td>16.18</td><td>89.481</td><td>93.306</td><td>49</td><td>4.452</td><td>80.96</td><td>138.321</td><td>21</td><td>11.728</td><td>0.056</td></tr>
+<tr class='sig'><td class='num'>35</td><td class='lbl'>Are important for promoting children's…</td><td>20.48</td><td>101.265</td><td>105.089</td><td>49</td><td>2.659</td><td>55.199</td><td>112.56</td><td>21</td><td>17.821</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>37</td><td class='lbl'>Should be accessible to all children,…</td><td>28.5</td><td>117.788</td><td>121.612</td><td>49</td><td>3.41</td><td>67.623</td><td>124.984</td><td>21</td><td>25.09</td><td>< .001</td></tr>
+<tr class='nonsig'><td class='num'>38</td><td class='lbl'>Parents or caregivers play a crucial role in…</td><td>6.5</td><td>43.883</td><td>47.707</td><td>49</td><td>3.652</td><td>71.051</td><td>128.412</td><td>21</td><td>2.848</td><td>0.908</td></tr>
+<tr class='sig'><td class='num'>39</td><td class='lbl'>Confident in my ability to support my child…</td><td>21.52</td><td>103.742</td><td>107.566</td><td>49</td><td>4.856</td><td>85.301</td><td>142.661</td><td>21</td><td>16.664</td><td>0.014</td></tr>
+<tr class='sig'><td class='num'>40</td><td class='lbl'>Equipped to provide my child with the support…</td><td>19.52</td><td>98.865</td><td>102.689</td><td>49</td><td>3.106</td><td>62.964</td><td>120.325</td><td>21</td><td>16.414</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>41</td><td class='lbl'>Limited resources (e.g., funding, materials)…</td><td>26.5</td><td>114.15</td><td>117.974</td><td>49</td><td>6.503</td><td>99.908</td><td>157.269</td><td>21</td><td>19.997</td><td>0.026</td></tr>
+<tr class='nonsig'><td class='num'>42</td><td class='lbl'>Cultural and language barriers make it…</td><td>31.62</td><td>122.982</td><td>126.806</td><td>49</td><td>16.529</td><td>146.549</td><td>203.91</td><td>21</td><td>15.091</td><td>0.827</td></tr>
+<tr class='sig'><td class='num'>43</td><td class='lbl'>Stigma and shame surrounding adverse childhood…</td><td>28.18</td><td>117.223</td><td>121.047</td><td>49</td><td>7.415</td><td>106.469</td><td>163.829</td><td>21</td><td>20.765</td><td>0.042</td></tr>
+<tr class='nonsig'><td class='num'>44</td><td class='lbl'>Limited knowledge or training in…</td><td>25.78</td><td>112.773</td><td>116.597</td><td>49</td><td>7.263</td><td>105.433</td><td>162.794</td><td>21</td><td>18.517</td><td>0.065</td></tr>
+<tr class='nonsig'><td class='num'>45</td><td class='lbl'>High workload or other personal or family…</td><td>34.58</td><td>127.456</td><td>131.281</td><td>49</td><td>13.117</td><td>134.987</td><td>192.347</td><td>21</td><td>21.463</td><td>0.318</td></tr>
+<tr class='sig'><td class='num'>46</td><td class='lbl'>Experienced any adverse childhood experiences…</td><td>52.02</td><td>147.874</td><td>151.698</td><td>49</td><td>5.703</td><td>93.339</td><td>150.699</td><td>21</td><td>46.317</td><td>< .001</td></tr>
+<tr class='nonsig'><td class='num'>48</td><td class='lbl'>Sought help or support for your own…</td><td>38.5</td><td>132.826</td><td>136.65</td><td>49</td><td>14.674</td><td>140.595</td><td>197.956</td><td>21</td><td>23.826</td><td>0.324</td></tr>
+<tr class='nonsig'><td class='num'>49</td><td class='lbl'>Talked to your child about your own…</td><td>64</td><td>158.237</td><td>162.061</td><td>49</td><td>18.52</td><td>152.234</td><td>209.595</td><td>21</td><td>45.48</td><td>0.076</td></tr>
+<tr class='sig'><td class='num'>50</td><td class='lbl'>Believe that your own experiences of adverse…</td><td>70</td><td>162.717</td><td>166.542</td><td>49</td><td>17.799</td><td>150.249</td><td>207.61</td><td>21</td><td>52.201</td><td>0.033</td></tr>
+<tr class='sig'><td class='num'>52</td><td class='lbl'>Live in a safe and supportive environment</td><td>54.5</td><td>150.203</td><td>154.027</td><td>49</td><td>14.152</td><td>138.784</td><td>196.145</td><td>21</td><td>40.348</td><td>0.038</td></tr>
+<tr class='nonsig'><td class='num'>53</td><td class='lbl'>Feel supported by your family and community</td><td>37.52</td><td>131.536</td><td>135.36</td><td>49</td><td>17.01</td><td>147.984</td><td>205.345</td><td>21</td><td>20.51</td><td>0.604</td></tr>
+<tr class='nonsig'><td class='num'>54</td><td class='lbl'>Have access to resources (e.g., financial,…</td><td>44</td><td>139.502</td><td>143.326</td><td>49</td><td>14.805</td><td>141.042</td><td>198.402</td><td>21</td><td>29.195</td><td>0.179</td></tr>
+<tr class='nonsig'><td class='num'>55</td><td class='lbl'>Feel that your child has access to adequate…</td><td>41.92</td><td>137.081</td><td>140.905</td><td>49</td><td>11.584</td><td>128.775</td><td>186.136</td><td>21</td><td>30.336</td><td>0.057</td></tr>
+<tr class='nonsig'><td class='num'>56</td><td class='lbl'>Feel that your child has access to nutritious…</td><td>29.52</td><td>119.546</td><td>123.37</td><td>49</td><td>8.11</td><td>110.945</td><td>168.306</td><td>21</td><td>21.41</td><td>0.055</td></tr>
+<tr class='sig'><td class='num'>57</td><td class='lbl'>Perceive that your child has access to higher…</td><td>34.18</td><td>126.875</td><td>130.699</td><td>49</td><td>4.737</td><td>84.058</td><td>141.418</td><td>21</td><td>29.443</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>58</td><td class='lbl'>Parental care, early childhood education, and…</td><td>18.5</td><td>96.181</td><td>100.005</td><td>49</td><td>3.122</td><td>63.213</td><td>120.574</td><td>21</td><td>15.378</td><td>0.002</td></tr>
+<tr class='nonsig'><td class='num'>59</td><td class='lbl'>Parents or caregivers can play a crucial role…</td><td>14.88</td><td>85.294</td><td>89.118</td><td>49</td><td>5.017</td><td>86.931</td><td>144.292</td><td>21</td><td>9.863</td><td>0.181</td></tr>
+<tr class='sig'><td class='num'>60</td><td class='lbl'>Early childhood education and welfare can…</td><td>18.48</td><td>96.127</td><td>99.951</td><td>49</td><td>2.426</td><td>50.615</td><td>107.976</td><td>21</td><td>16.054</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>61</td><td class='lbl'>Parental involvement in education and early…</td><td>12.58</td><td>76.898</td><td>80.722</td><td>49</td><td>2.558</td><td>53.257</td><td>110.617</td><td>21</td><td>10.022</td><td>0.007</td></tr>
+<tr class='sig'><td class='num'>62</td><td class='lbl'>A strong relationship between preschool…</td><td>11.38</td><td>71.886</td><td>75.71</td><td>49</td><td>2.321</td><td>48.391</td><td>105.751</td><td>21</td><td>9.059</td><td>0.007</td></tr>
+<tr class='nonsig'><td class='num'>63</td><td class='lbl'>If your child experiences Adverse Childhood…</td><td>30.08</td><td>120.486</td><td>124.31</td><td>49</td><td>8.317</td><td>112.208</td><td>169.569</td><td>21</td><td>21.763</td><td>0.058</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="legend"><span class="dot ochre"></span> significant (<em>p</em> &lt; .05) &nbsp; <span class="dot grey"></span> not significant</p>
+</details>
+
+<details class="data-disclosure">
+  <summary>Table 6 &mdash; GLM results, teacher/practitioner items (31 items)</summary>
+  <div class="table-scroll">
+  <table class="data-table glm-table">
+    <thead><tr><th>#</th><th>Item</th><th>Dev. H&#8320;</th><th>AIC H&#8320;</th><th>BIC H&#8320;</th><th><em>df</em> H&#8320;</th><th>Dev. H&#8321;</th><th>AIC H&#8321;</th><th>BIC H&#8321;</th><th><em>df</em> H&#8321;</th><th>&chi;&sup2;</th><th><em>p</em></th></tr></thead>
+    <tbody>
+    <tr class='nonsig'><td class='num'>9</td><td class='lbl'>Have difficulty trusting others</td><td>57.96</td><td>231.948</td><td>237.138</td><td>98</td><td>39.422</td><td>237.791</td><td>300.074</td><td>76</td><td>18.537</td><td>0.063</td></tr>
+<tr class='sig'><td class='num'>10</td><td class='lbl'>Often feel guilty or responsible for what…</td><td>99.636</td><td>285.584</td><td>290.774</td><td>98</td><td>52.755</td><td>266.632</td><td>328.915</td><td>76</td><td>46.882</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>11</td><td class='lbl'>Struggle with emotional regulation</td><td>83.636</td><td>268.254</td><td>273.445</td><td>98</td><td>50.954</td><td>263.194</td><td>325.477</td><td>76</td><td>32.683</td><td>0.006</td></tr>
+<tr class='nonsig'><td class='num'>12</td><td class='lbl'>Have difficulty forming healthy relationships…</td><td>90</td><td>275.514</td><td>280.704</td><td>98</td><td>71.427</td><td>296.632</td><td>358.915</td><td>76</td><td>18.573</td><td>0.597</td></tr>
+<tr class='sig'><td class='num'>13</td><td class='lbl'>Struggle with academic achievement</td><td>72.99</td><td>254.775</td><td>259.965</td><td>98</td><td>48.029</td><td>257.342</td><td>319.625</td><td>76</td><td>24.961</td><td>0.032</td></tr>
+<tr class='sig'><td class='num'>14</td><td class='lbl'>Often feel anxious or depressed</td><td>76.505</td><td>259.431</td><td>264.622</td><td>98</td><td>50.325</td><td>261.965</td><td>324.248</td><td>76</td><td>26.18</td><td>0.032</td></tr>
+<tr class='nonsig'><td class='num'>15</td><td class='lbl'>Have a higher risk of engaging in risky…</td><td>97.354</td><td>283.29</td><td>288.48</td><td>98</td><td>71.844</td><td>297.209</td><td>359.492</td><td>76</td><td>25.509</td><td>0.252</td></tr>
+<tr class='nonsig'><td class='num'>16</td><td class='lbl'>May have difficulty with impulse control</td><td>78.99</td><td>262.596</td><td>267.786</td><td>98</td><td>59.975</td><td>279.331</td><td>341.614</td><td>76</td><td>19.015</td><td>0.371</td></tr>
+<tr class='nonsig'><td class='num'>17</td><td class='lbl'>Build resilience</td><td>60.182</td><td>235.673</td><td>240.863</td><td>98</td><td>46.571</td><td>254.291</td><td>316.574</td><td>76</td><td>13.61</td><td>0.464</td></tr>
+<tr class='nonsig'><td class='num'>18</td><td class='lbl'>Can provide children with a safe and…</td><td>61.414</td><td>237.679</td><td>242.87</td><td>98</td><td>48.449</td><td>258.204</td><td>320.487</td><td>76</td><td>12.965</td><td>0.565</td></tr>
+<tr class='sig'><td class='num'>19</td><td class='lbl'>Develop social and emotional skills</td><td>33.838</td><td>178.671</td><td>183.861</td><td>98</td><td>19.427</td><td>167.731</td><td>230.014</td><td>76</td><td>14.412</td><td>0.001</td></tr>
+<tr class='nonsig'><td class='num'>20</td><td class='lbl'>Succeed academically</td><td>56.505</td><td>229.432</td><td>234.622</td><td>98</td><td>39.076</td><td>236.917</td><td>299.2</td><td>76</td><td>17.43</td><td>0.086</td></tr>
+<tr class='nonsig'><td class='num'>21</td><td class='lbl'>Develop positive relationships with peers and…</td><td>47.657</td><td>212.571</td><td>217.761</td><td>98</td><td>33.209</td><td>220.813</td><td>283.096</td><td>76</td><td>14.447</td><td>0.099</td></tr>
+<tr class='sig'><td class='num'>22</td><td class='lbl'>Develop a sense of belonging and purpose</td><td>46.081</td><td>209.242</td><td>214.432</td><td>98</td><td>27.806</td><td>203.233</td><td>265.516</td><td>76</td><td>18.275</td><td>0.005</td></tr>
+<tr class='nonsig'><td class='num'>23</td><td class='lbl'>Feel more confident and empowered</td><td>40.626</td><td>196.77</td><td>201.96</td><td>98</td><td>28.993</td><td>207.373</td><td>269.656</td><td>76</td><td>11.633</td><td>0.15</td></tr>
+<tr class='nonsig'><td class='num'>24</td><td class='lbl'>Overcome the negative effects of adverse…</td><td>58.545</td><td>232.944</td><td>238.134</td><td>98</td><td>39.84</td><td>238.835</td><td>301.118</td><td>76</td><td>18.705</td><td>0.063</td></tr>
+<tr class='sig'><td class='num'>25</td><td class='lbl'>Are effective in supporting children of ethnic…</td><td>60.081</td><td>235.506</td><td>240.697</td><td>98</td><td>36.625</td><td>230.507</td><td>292.79</td><td>76</td><td>23.455</td><td>0.006</td></tr>
+<tr class='nonsig'><td class='num'>26</td><td class='lbl'>It is important to promote resilience in…</td><td>47.636</td><td>212.529</td><td>217.719</td><td>98</td><td>33.559</td><td>221.849</td><td>284.132</td><td>76</td><td>14.078</td><td>0.12</td></tr>
+<tr class='nonsig'><td class='num'>27</td><td class='lbl'>Require support from the government and local…</td><td>76.081</td><td>258.881</td><td>264.071</td><td>98</td><td>57.427</td><td>275.034</td><td>337.317</td><td>76</td><td>18.654</td><td>0.344</td></tr>
+<tr class='nonsig'><td class='num'>28</td><td class='lbl'>Early childhood education teachers and…</td><td>36.727</td><td>186.781</td><td>191.972</td><td>98</td><td>27.034</td><td>200.445</td><td>262.727</td><td>76</td><td>9.694</td><td>0.243</td></tr>
+<tr class='nonsig'><td class='num'>29</td><td class='lbl'>Play a crucial role in promoting resilience in…</td><td>64.626</td><td>242.726</td><td>247.917</td><td>98</td><td>49.793</td><td>260.912</td><td>323.195</td><td>76</td><td>14.834</td><td>0.442</td></tr>
+<tr class='nonsig'><td class='num'>30</td><td class='lbl'>Should be accessible to all children,…</td><td>38.444</td><td>191.305</td><td>196.495</td><td>98</td><td>32.339</td><td>214.183</td><td>271.276</td><td>78</td><td>6.106</td><td>0.777</td></tr>
+<tr class='nonsig'><td class='num'>31</td><td class='lbl'>Confident in providing support to children who…</td><td>54</td><td>224.942</td><td>230.133</td><td>98</td><td>40.289</td><td>239.944</td><td>302.227</td><td>76</td><td>13.711</td><td>0.295</td></tr>
+<tr class='nonsig'><td class='num'>32</td><td class='lbl'>Comfortable discussing children's experiences…</td><td>46.545</td><td>210.235</td><td>215.426</td><td>98</td><td>37.757</td><td>233.519</td><td>295.802</td><td>76</td><td>8.788</td><td>0.711</td></tr>
+<tr class='nonsig'><td class='num'>33</td><td class='lbl'>Equipped to foster resilience in children who…</td><td>50.182</td><td>217.683</td><td>222.873</td><td>98</td><td>38.89</td><td>236.446</td><td>298.729</td><td>76</td><td>11.292</td><td>0.471</td></tr>
+<tr class='nonsig'><td class='num'>34</td><td class='lbl'>Supported by my colleagues and the community…</td><td>58.545</td><td>232.944</td><td>238.134</td><td>98</td><td>48.512</td><td>258.332</td><td>320.615</td><td>76</td><td>10.033</td><td>0.811</td></tr>
+<tr class='nonsig'><td class='num'>35</td><td class='lbl'>Limited resources (funding, materials, etc.)…</td><td>58.323</td><td>232.567</td><td>237.757</td><td>98</td><td>42.442</td><td>245.098</td><td>307.381</td><td>76</td><td>15.882</td><td>0.205</td></tr>
+<tr class='sig'><td class='num'>36</td><td class='lbl'>Cultural and language barriers make it…</td><td>71.111</td><td>252.193</td><td>257.383</td><td>98</td><td>46.112</td><td>253.309</td><td>315.592</td><td>76</td><td>24.999</td><td>0.024</td></tr>
+<tr class='sig'><td class='num'>37</td><td class='lbl'>Stigma and shame surrounding adverse childhood…</td><td>104.182</td><td>290.001</td><td>295.191</td><td>98</td><td>48.864</td><td>259.048</td><td>321.331</td><td>76</td><td>55.318</td><td>< .001</td></tr>
+<tr class='sig'><td class='num'>38</td><td class='lbl'>Limited knowledge or training in…</td><td>77.354</td><td>260.523</td><td>265.713</td><td>98</td><td>46.49</td><td>254.118</td><td>316.401</td><td>76</td><td>30.863</td><td>0.004</td></tr>
+<tr class='sig'><td class='num'>39</td><td class='lbl'>High case-loads or workload limit the time and…</td><td>69.96</td><td>250.577</td><td>255.767</td><td>98</td><td>37.815</td><td>233.671</td><td>295.954</td><td>76</td><td>32.144</td><td>< .001</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="legend"><span class="dot madder"></span> significant (<em>p</em> &lt; .05) &nbsp; <span class="dot grey"></span> not significant</p>
+</details>
+
+<h3 class="sub">Thematic Analysis of Interview Data</h3>
+<p>Thematic analysis of interviews with 15 parents/caregivers and 50 teachers/practitioners identified consistent strategies for promoting resilience, organised below by respondent group.</p>
+
+<p class="strategy-lead">Parents' and caregivers' strategies</p>
+<div class="strategy-grid">
+  <div class="strategy-card">
+    <p class="strategy-name">Active listening</p>
+    <p>The foundation of family communication: attentive engagement with children's concerns built trust, surfaced the causes of distress, and gave children confidence that support would be available.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Promoting autonomy</p>
+    <p>Age-appropriate decisions within a safe framework built independence and critical thinking; confidence grew as children experienced the consequences of their own choices.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Supporting academic &amp; personal interests</p>
+    <p>Active engagement with children's curiosity, beyond direct academic help, linked to motivation and emotional development.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Emotional &amp; physical presence</p>
+    <p>Simply being consistently available was foundational to children's sense of security and belonging.</p>
+  </div>
+</div>
+
+<p class="strategy-lead">Teachers' and practitioners' strategies</p>
+<div class="strategy-grid">
+  <div class="strategy-card">
+    <p class="strategy-name">Safe, supportive classrooms</p>
+    <p>Consistent routines and open communication were essential given many children carry the impact of family conflict or substance use at home.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Teaching emotional regulation</p>
+    <p>Direct coping-skills instruction, paired with individualised support and parent collaboration.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Building positive relationships</p>
+    <p>Trusted adults and family members formed a protective system supporting trust, self-esteem, and belonging.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Strengths-based approach</p>
+    <p>Shifting focus from weaknesses to strengths, particularly important for countering negative self-perception after adversity.</p>
+  </div>
+  <div class="strategy-card">
+    <p class="strategy-name">Collaboration with services</p>
+    <p>Extending classroom support into a wider network of therapists, community organisations, and families.</p>
+  </div>
+</div>
+
+<p><strong>The role of early education and welfare access.</strong> Participants across both groups described early education as contributing to resilience through several channels: educational incentives (scholarships, meal programmes), cognitive and creative development, emotional and social growth through structured peer interaction, and financial relief that indirectly supports children's wellbeing by reducing household stress. Reported barriers to access included selective admission criteria, scheduling conflicts with parents' work, limited transport, and &mdash; most consistently &mdash; financial cost.</p>
+
+<p><strong>Convergence between parent and teacher accounts.</strong> Both groups independently identified active listening and emotionally secure environments as central to resilience-building (Centre of Excellence for Early Childhood Development, 2014; Herndon &amp; Waggoner, 2021; Long &amp; Evans, 2021; Morgan et al., 2016), and both emphasised that resilience-building is inherently collaborative rather than the responsibility of any single adult &mdash; parents drawing on extended family (Howard &amp; Johnson, 2000; Đurišić &amp; Bunijevac, 2017; Durlak, 1998), teachers on external services and community organisations (Tanyu et al., 2020). This convergence across independently interviewed groups strengthens confidence that these strategies reflect substantive, shared practice rather than artefacts of either group's framing.</p>
+
+</div>
+</section>
+
+<section class="block band-a" id="discussion">
+<div class="block-inner">
+<h2 class="sec-title">Discussion</h2>
+
+<p>This study examined how parental care, early childhood education, and community support relate to resilience-related perceptions among ethnic minority children in Northern Thailand, drawing on quantitative survey data from parents/caregivers and teachers/practitioners alongside qualitative interview data from both groups. Findings are discussed below in relation to the four research questions guiding this study.</p>
+<p><strong>Challenges and manifestations of ACEs.</strong> Both quantitative and qualitative data confirmed that ethnic minority families and educators in this study perceive ACEs as a significant and multifaceted challenge. Notably, demographic and contextual predictors explained variation in parents’ <em>general beliefs</em> about ACEs and early education more consistently than they explained parents’ reports of their <em>own</em> household’s resource access or disclosure of personal ACE history (items 53–56, 59, 63) — areas where over 40% of surveyed parents reported having experienced ACEs themselves. This gap between general belief and personal disclosure is consistent with the broader literature’s emphasis on stigma as a barrier to support-seeking (Bellis et al., 2019), and suggests that intergenerational programming — support that explicitly addresses parents’ own unresolved adversity alongside their children’s — may be necessary to close it (Dong et al., 2004).</p>
+<p><strong>Parental care and resilience.</strong> The active listening, autonomy-promotion, and consistent presence strategies identified in parent interviews align closely with the trusted-adult-relationship mechanism established in the broader resilience literature (Ashton et al., 2021): each strategy functions, in different ways, to maintain the parent as an accessible, responsive source of support. The GLM results add a complementary, population-level perspective: the demographic and contextual factors measured here (age, education, income, family size) meaningfully differentiated how parents responded to roughly two-thirds of survey items, indicating that parental background characteristics are far from incidental to how resilience-related beliefs and practices are reported in this sample, and should be considered when designing family-targeted interventions rather than treated as a uniform population.</p>
+<p><strong>The role of early childhood education.</strong> Teachers’ and parents’ accounts converged on early education’s role in building cognitive, social, and emotional capacity, and in relieving financial pressure on families through scholarships and meal programmes — channels that operate alongside, rather than instead of, direct pedagogical benefit. However, the comparatively low rate of significant demographic prediction among teacher/practitioner items (35%, versus 65% for parents) suggests that teachers’ confidence, perceived effectiveness, and classroom practice are more uniform across age, role, and experience than parents’ equivalent beliefs are across their own demographic range. One plausible explanation is that teacher practice in this sample is shaped more by shared professional training and school-level culture than by individual background — though this study’s design cannot distinguish that explanation from the alternative possibility that the demographic variables measured here (age, position, workplace, experience) simply capture less of the variation relevant to teacher practice than the equivalent variables capture for parents. Future research incorporating measures of training history, supervisory support, or school-level resourcing would help distinguish between these explanations.</p>
+<p><strong>Community support systems.</strong> Both parent and teacher accounts emphasised that resilience-building functions as a collective rather than individual effort — extending, for parents, to grandparents and extended family, and for teachers, to therapists and community organisations. This is consistent with prior accounts of resilience as embedded in nested family, school, and community systems (Bronfenbrenner, 1979), and suggests that interventions seeking to strengthen any single layer of support (e.g., parent training alone, or teacher training alone) may have limited reach unless paired with efforts to strengthen the connective tissue between layers — particularly the financial and structural barriers (cost, transport, admission criteria) that both groups identified as limiting access to early education in the first place.</p>
+
+</div>
+</section>
+<section class="block band-b" id="limitations">
+<div class="block-inner">
+<h2 class="sec-title">Limitations</h2>
+
+<p>This study has several limitations that should inform interpretation of its findings and any subsequent research building on it. First, convenience and snowball sampling limit the generalisability of findings to the broader population of ethnic minority families and educators in Northern Thailand, and may have introduced selection bias toward participants more willing or able to engage with researchers. Second, data collection took place during the COVID-19 pandemic, which constrained access to some communities and may have shaped participants’ circumstances and responses in ways not captured by this design. Third, several demographic variables were collected as ordinal categories without an accompanying coding key available to the present analysis; as noted in the Method, real-world units (years, income brackets) should not be inferred from category means without confirming category boundaries against the original instrument. Fourth, this study relies on self-reported data, which is subject to social desirability bias and recall limitations, particularly for sensitive items concerning personal ACE history. Fifth, the cross-sectional design captures a single point in time and cannot speak to longitudinal or intergenerational outcomes.</p>
+
+</div>
+</section>
+<section class="block band-a" id="conclusion">
+<div class="block-inner">
+<h2 class="sec-title">Conclusion</h2>
+
+<p>This study examined protective factors associated with resilience among ethnic minority children exposed to ACEs in Northern Thailand, drawing on parent/caregiver and teacher/practitioner perspectives. Quantitative analysis showed that demographic and contextual factors more strongly differentiated parents’ resilience-related beliefs and practices (significant for 65% of items) than teachers’ equivalent perceptions (significant for 35% of items), pointing to a meaningful difference in how individual variation operates across the two groups. Thematic analysis identified active listening, autonomy promotion, and consistent presence as central parental strategies, and safe environments, emotional-regulation instruction, and strengths-based practice as central teacher strategies — with both groups independently converging on the importance of collaborative, multi-level support extending beyond any single relationship.</p>
+<p>Together, these findings suggest that interventions seeking to build resilience in this population should be designed with two complementary tracks in mind: family-centred support that accounts for meaningful demographic variation among parents (including, specifically, support that addresses parents’ own unresolved ACE history), and school-based support that strengthens the professional and structural conditions of teaching practice rather than targeting individual teacher characteristics. Reducing the financial and structural barriers to early education access identified by both groups — cost, transport, and admission criteria — emerges as a shared precondition for either track to reach the children who need it most.</p>
+
+</div>
+</section>
+
+<section class="block band-b" id="references">
+<div class="block-inner">
+<h2 class="sec-title">References</h2>
+<div class="ref-list">
+<p class="ref-entry">Ashton, K., Davies, A., Hughes, K., Ford, K., Cotter-Roberts, A., &amp; Bellis, M. (2021). Adult support during childhood: A retrospective study of trusted adult relationships, sources of personal adult support, and their association with childhood resilience resources. <em>BMC Psychology</em>, <em>9</em>. https://doi.org/10.1186/s40359-021-00601-x</p><p class="ref-entry">Bellis, M. A., Hughes, K., Ford, K., Rodriguez, G. R., Sethi, D., &amp; Passmore, J. (2019). Life course health consequences and associated annual costs of adverse childhood experiences across Europe and North America: A systematic review and meta-analysis. <em>The Lancet Public Health</em>, <em>4</em>(10), e517–e528. https://doi.org/10.1016/S2468-2667(19)30145-8</p><p class="ref-entry">Braun, V., Clarke, V., Hayfield, N., Terry, G., &amp; Liamputtong, P. (2019). Thematic analysis. In P. Liamputtong (Ed.), <em>Handbook of research methods in health social sciences</em> (pp. 843–860). Springer.</p><p class="ref-entry">Bronfenbrenner, U. (1979). <em>The ecology of human development</em>. Harvard University Press.</p><p class="ref-entry">Brown, A. B., &amp; Green, C. G. (2017). Understanding generalized linear models. <em>Journal of Education and Behavioral Statistics</em>, <em>42</em>(4), 431–457.</p><p class="ref-entry">Clarkson Freeman, P. A. (2014). Prevalence and relationship between adverse childhood experiences and child behavior among young children. <em>Children and Youth Services Review</em>, <em>47</em>(1), 487–492.</p><p class="ref-entry">Collins, D. (2003). Pretesting survey instruments: An overview of cognitive methods. <em>Quality of Life Research</em>, <em>12</em>(3), 229–238. https://doi.org/10.1023/A:1023254226592</p><p class="ref-entry">Creswell, J. W., &amp; Creswell, J. D. (2018). <em>Research design: Qualitative, quantitative, and mixed methods approaches</em> (5th ed.). Sage.</p><p class="ref-entry">Danese, A., &amp; McEwen, B. S. (2012). Adverse childhood experiences, allostasis, allostatic load, and age-related disease. <em>Physiology &amp; Behavior</em>, <em>106</em>(1), 29–39.</p><p class="ref-entry">Dong, M., Anda, R. F., Felitti, V. J., Dube, S. R., Williamson, D. F., Thompson, T. J., Loo, C. M., &amp; Giles, W. H. (2004). The interrelatedness of multiple forms of childhood abuse, neglect, and household dysfunction. <em>Child Abuse &amp; Neglect</em>, <em>28</em>(7), 771–784. https://doi.org/10.1016/j.chiabu.2004.01.008</p><p class="ref-entry">Đurišić, M., &amp; Bunijevac, M. (2017). Parental involvement as an important factor for successful education. <em>Center for Educational Policy Studies Journal</em>, <em>7</em>(3), 137–153.</p><p class="ref-entry">Durlak, J. (1998). Common risk and protective factors in successful prevention programs. <em>American Journal of Orthopsychiatry</em>, <em>68</em>(4), 1–9.</p><p class="ref-entry">Elmore, A., Crouch, E., &amp; Chowdhury, M. (2020). The interaction of adverse childhood experiences and resiliency on the outcome of depression among children and youth, 8–17 year olds. <em>Child Abuse &amp; Neglect</em>, <em>107</em>, 104616. https://doi.org/10.1016/j.chiabu.2020.104616</p><p class="ref-entry">Felitti, V. J., &amp; Anda, R. F. (2010). The relationship of adverse childhood experiences to adult health, well-being, social function, and healthcare. In R. Lanius, E. Vermetten, &amp; C. Pain (Eds.), <em>The impact of early life trauma on health and disease: The hidden epidemic</em> (pp. 77–87). Cambridge University Press.</p><p class="ref-entry">Felitti, V. J., Anda, R. F., Nordenberg, D., Williamson, D. F., Spitz, A. M., Edwards, V., Koss, M. P., &amp; Marks, J. S. (1998). Relationship of childhood abuse and household dysfunction to many of the leading causes of death in adults: The Adverse Childhood Experiences (ACE) Study. <em>American Journal of Preventive Medicine</em>, <em>14</em>(4), 245–258. https://doi.org/10.1016/S0749-3797(98)00017-8</p><p class="ref-entry">Garcia, M. A., Johnson, R. M., &amp; Smith, T. D. (2021). Analyzing non-normal data distributions using generalized linear models. <em>Journal of Applied Statistics</em>, <em>48</em>(6), 1193–1212.</p><p class="ref-entry">Herndon, M., &amp; Waggoner, C. (2021). Building resilience: Reducing the impact of adverse childhood experiences. <em>Dimensions</em>, <em>49</em>(1), 28–33.</p><p class="ref-entry">Howard, S., &amp; Johnson, B. (2000). What makes the difference? Children and teachers talk about resilient outcomes for children “at risk.” <em>Educational Studies</em>, <em>26</em>(3), 321–337. https://doi.org/10.1080/03055690050137132</p><p class="ref-entry">Khodabandeh, F., Khalilzadeh, M., &amp; Hemati, Z. (2018). Adverse childhood experiences, self-esteem, and aggression in male forensic clients. <em>Journal of Interpersonal Violence</em>, <em>33</em>(6), 917–935.</p><p class="ref-entry">Long, S., &amp; Evans, C. (2021). <em>Promoting resilience-informed care: A practical guidance resource for frontline workers in family-based care</em>. Better Care Network. https://bettercarenetwork.org/sites/default/files/2021-10/Product%20100.11_Promoting%20Resilience%20Informed%20Care%20Guidance%20Final%2024Sept2021.pdf</p><p class="ref-entry">Maughan, B., &amp; McCarthy, G. (1997). Childhood adversities and psychosocial disorders. <em>British Medical Bulletin</em>, <em>53</em>(1), 156–169. https://doi.org/10.1093/oxfordjournals.bmb.a011597</p><p class="ref-entry">McKelvey, L. M., Saccente, J. E., Swindle, T. M., &amp; Adair, L. S. (2018). Association between adverse childhood experiences and educational outcomes in early adolescence. <em>Child: Care, Health and Development</em>, <em>44</em>(3), 430–437.</p><p class="ref-entry">Morgan, M., Rochford, S., &amp; Sheehan, A. (2016). <em>Adversity in childhood: Outcomes, risk and resilience</em>. Centre for Effective Services.</p><p class="ref-entry">Nijs, L., &amp; Nicolaou, G. (2021). Flourishing in resonance: Joint resilience building through music and motion. <em>Frontiers in Psychology</em>, <em>12</em>. https://doi.org/10.3389/fpsyg.2021.666702</p><p class="ref-entry">Ortiz, R. (2019). Building resilience against the sequelae of adverse childhood experiences: Rise up, change your life, and reform health care. <em>American Journal of Lifestyle Medicine</em>, <em>13</em>(5), 470–479. https://doi.org/10.1177/1559827619839997</p><p class="ref-entry">Phakakorn, S., et al. (2018). Health disparities among ethnic minority women in northern Thailand: A cross-sectional survey. <em>BMC Public Health</em>, <em>18</em>(1), 670. https://doi.org/10.1186/s12889-018-5579-x</p><p class="ref-entry">Phakakorn, S., et al. (2019). Housing conditions and health of ethnic minority populations in northern Thailand. <em>PLoS ONE</em>, <em>14</em>(2), e0211861. https://doi.org/10.1371/journal.pone.0211861</p><p class="ref-entry">Ratanasuwan, W., et al. (2020). Ethnic disparity in maternal mortality in Thailand: A case-control study. <em>Reproductive Health</em>, <em>17</em>(1), 24. https://doi.org/10.1186/s12978-020-0875-6</p><p class="ref-entry">Tanyu, M., Spier, E., Pulizzi, S., Rooney, M., Sorenson, I., &amp; Fernandez, J. (2020). <em>Improving education outcomes for students who have experienced trauma and/or adversity</em>. OECD.</p><p class="ref-entry">Walker, V. S., &amp; Walsh, J. (2015). <em>Understanding the importance of creating positive school climates to support students facing adversity and trauma</em>. National Center on Safe Supportive Learning Environments. https://safesupportivelearning.ed.gov/sites/default/files/NCSSLE-Trauma-Adversity-Brief-508.pdf</p>
+</div>
+<div class="callout"><p><em>The following sources are cited in the text above but could not be located in the source materials’ reference lists and require full citation details before this report is finalised: Centre of Excellence for Early Childhood Development (2014); Masten &amp; Barnes (2018); McFerran &amp; Rickson (2014); Thai Ministry of Education (2020).</em></p></div>
+</div>
+</section>
+
+<section class="block band-a" id="appendices">
+<div class="block-inner">
+<h2 class="sec-title">Appendices</h2>
+<p>Full questionnaire item wording and interview protocols. Item numbers here correspond to those used in Tables 2, 4, 5, and 6 above.</p>
+<details class="data-disclosure"><summary>Appendix A: Parent/Caregiver Questionnaire Items</summary><div class="appendix-body">
+<p><em>Demographic information:</em> age, gender, education level, occupation, marital status, income level, household size, relationship to child, child’s age, child’s gender, child’s education level, child’s current early childhood education/welfare status.</p>
+<p><strong>Section 2 — Perceptions of ACEs (13–20):</strong> Beliefs about whether children with ACEs have difficulty trusting others (13); feel guilty or responsible (14); struggle with emotional regulation (15); have difficulty forming peer relationships (16); struggle academically (17); feel anxious or depressed (18); show elevated risk-taking (19); have difficulty with impulse control (20).</p>
+<p><strong>Section 3 — Parental care (21–25):</strong> The role of parents/caregivers in promoting resilience (21); providing a safe, supportive home (22); modelling positive coping (23); listening and providing emotional support (24); involvement in education and welfare (25).</p>
+<p><strong>Section 4 — Early childhood education and welfare (26–33):</strong> Perceived contribution of ECE/welfare programmes to resilience (26), safety (27), social-emotional skills (28), academic success (29), peer/adult relationships (30), belonging (31), confidence (32), and overcoming ACE effects (33).</p>
+<p><strong>Section 5 — Perceptions of ECE and parental care (34–40):</strong> Beliefs about programme effectiveness (34), importance for resilience (35), prioritisation by government/community (36), universal accessibility (37), the role of parents (38), and personal confidence/preparedness to support one’s own child (39–40).</p>
+<p><strong>Section 6 — Perceived barriers (41–45):</strong> Limited resources (41), cultural/language barriers (42), stigma and shame (43), limited trauma-informed training (44), workload/personal constraints (45).</p>
+<p><strong>Section 7 — Parents’ own ACE history (46–51):</strong> Personal ACE history (46); effect on parenting style (47); help-seeking (48); disclosure to child (49); perceived effect on child’s resilience (50) and reasoning (51).</p>
+<p><strong>Section 8 — Household environment (52–57):</strong> Safety (52), family/community support (53), access to resources (54), healthcare access (55), nutrition/clean water (56), access to higher education (57).</p>
+<p><strong>Section 9 — Perceived benefits of combined support (58–62):</strong> Parental care, ECE, and welfare working together (58); parents’ role in academic success (59); ECE/welfare supporting parents (60); benefits of parental involvement (61); benefits of strong teacher–parent relationships (62).</p>
+<p><strong>Section 10 — Access to state-provided services (63–65):</strong> Convenience of accessing services for one’s child (63) or oneself (64); open-ended factors influencing the decision to seek support (65).</p>
+</div></details><details class="data-disclosure"><summary>Appendix B: Teacher/Practitioner Questionnaire Items</summary><div class="appendix-body">
+<p><em>Demographic information:</em> age, gender, nationality background, educational background, position, workplace, years working in early childhood education, ACE-related professional development, open-ended work experience with ethnic minority children.</p>
+<p><strong>Section 2 — Perceptions of ACEs (9–16):</strong> Parallel to parent items 13–20 (trust, guilt, emotional regulation, peer relationships, academic struggle, anxiety/depression, risk-taking, impulse control).</p>
+<p><strong>Section 3 — Early childhood education and welfare (17–24):</strong> Parallel to parent items 26–33.</p>
+<p><strong>Section 4 — Perceptions of ECE/welfare (25–30):</strong> Programme effectiveness (25); importance of promoting resilience (26); need for government/community support (27); educator training and resourcing needs (28); programme’s role in resilience (29); universal accessibility (30).</p>
+<p><strong>Section 5 — Confidence in supporting affected children (31–34):</strong> Confidence providing support (31); comfort discussing children’s experiences (32); feeling equipped to foster resilience (33); feeling supported by colleagues/community (34).</p>
+<p><strong>Section 6 — Perceived barriers (35–39):</strong> Limited resources (35), cultural/language barriers (36), stigma (37), limited trauma-informed training (38), caseload/workload (39).</p>
+</div></details><details class="data-disclosure"><summary>Appendix C: Parent/Caregiver Interview Protocol</summary><div class="appendix-body">
+<ol type="1">
+<li>Have you or your children had any adverse childhood experiences you would like to share?</li>
+<li>In your opinion, do adverse childhood experiences impact a child’s development and wellbeing?</li>
+<li>What role does parental supervision play in promoting emotional resilience for children who have experienced unwanted childhood events?</li>
+<li>Can you provide examples of how you have helped your children cope with adverse childhood experiences?</li>
+<li>How do you specifically support your child’s resilience at home?</li>
+<li>To what extent can early childhood education and welfare programmes contribute to promoting emotional resilience in children who have experienced unwanted childhood events?</li>
+<li>What options for early education and welfare programmes are available for these children?</li>
+<li>What challenges or obstacles arise when accessing services or attending early childhood education and welfare programmes?</li>
+<li>What additional measures could be implemented at the policy or community level to support children who have experienced traumatic events, while promoting emotional resilience through preschool education, welfare services, and parental supervision?</li>
+</ol>
+</div></details><details class="data-disclosure"><summary>Appendix D: Teacher/Practitioner Interview Protocol</summary><div class="appendix-body">
+<ol type="1">
+<li>Could you describe your previous experience working with children who have had adverse childhood experiences?</li>
+<li>In your opinion, how do adverse childhood experiences impact a child’s development and overall wellbeing?</li>
+<li>What role can early childhood education programmes play in promoting emotional resilience for children who have experienced adversity?</li>
+<li>Can you share examples of cases where early childhood education has helped improve the lives of children who have experienced trauma under your care?</li>
+<li>How do you support students who have experienced adversity in your classroom or childcare facility?</li>
+<li>What strategies do you use when engaging with parents or caregivers to help their child overcome traumatic events?</li>
+<li>What challenges or obstacles arise when supporting children with adverse experiences?</li>
+<li>Should early childhood education policies be culturally sensitive and inclusive of minority groups to ensure equal learning opportunities?</li>
+<li>Are there specific training programmes or resources that are helpful when working with students who have faced adversity?</li>
+<li>What additional steps can be taken at a policy or community level to promote emotional resilience through education and welfare services for young children affected by trauma?</li>
+</ol>
+<p><em>Note.</em> Tables 5 and 6 in the Results section present the complete generalised linear model output for all parent/caregiver and teacher/practitioner questionnaire items respectively; these consolidate and supersede the separate regression appendices in the original draft, which substantially duplicated this material across the main text and two further appendices.</p>
+</div></details>
+</div>
+</section><footer>
+  <p>Adverse Childhood Experiences and Resilience Development in Ethnic Minority Preschool Children: The Role of Parental Care, Early Childhood Education, and Community Support in Northern Thailand. Research report, March 2024.</p>
+  <p>Prapassara Thanosawan, PhD &middot; Nuttapa Thanosawan, PhD &middot; Correspondence on request.</p>
+  <p class="footer-grant">Supported by JSPS Grants-in-Aid KAKENHI JP 20KK0300 and JP 20K13914.</p>
+</footer>
+
+<script>
+(function(){
+  var links = document.querySelectorAll('.thread-nav a');
+  var sections = Array.from(links).map(function(a){
+    return document.getElementById(a.getAttribute('data-target'));
+  });
+
+  function onScroll(){
+    var y = window.scrollY;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (h>0 ? (y/h*100) : 0) + '%';
+
+    var active = 0;
+    for (var i=0;i<sections.length;i++){
+      if (sections[i] && sections[i].getBoundingClientRect().top < window.innerHeight*0.45){
+        active = i;
+      }
+    }
+    links.forEach(function(l,i){ l.classList.toggle('active', i===active); });
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
